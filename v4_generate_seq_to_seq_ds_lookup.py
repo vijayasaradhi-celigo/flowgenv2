@@ -36,12 +36,12 @@ def replace_keys_with_id(obj):
 
 def main():
     samples=[]
-    export_description_filename = 'most_frequent_export_descriptions.csv'
-    export_description_df = pd.read_csv(export_description_filename)
-    print(export_description_df.head())
+    lookup_description_filename = 'most_frequent_lookup_descriptions.csv'
+    lookup_description_df = pd.read_csv(lookup_description_filename)
+    print(lookup_description_df.head())
 
     #Iterate the dataframe with DESCRIPTION column
-    for index, row in track(export_description_df.iterrows(), total=len(export_description_df)):
+    for index, row in track(lookup_description_df.iterrows(), total=len(lookup_description_df)):
         description = row['DESCRIPTION']
         print(description)
         try:
@@ -55,11 +55,11 @@ def main():
             continue
         samples.append(sample)
     print(f"Generated {len(samples)} samples")
-    with open('ds_export_description_samples.json', 'w') as f:
+    with open('ds_lookup_description_samples.json', 'w') as f:
         json.dump(samples, f, indent=4)
 
     # Save in jsonl format for processing by machine
-    fp=open('ds_export_description_samples.jsonl','w')
+    fp=open('ds_lookup_description_samples.jsonl','w')
     for sample in samples:
         json.dump(sample, fp)
         fp.write('\n')
@@ -68,7 +68,7 @@ def main():
 
 def create_sample(description):
     raw_table_name = "raw_exports"
-    query = f"SELECT ID FROM all_export_ids_descriptions WHERE description == '{description}'"
+    query = f"SELECT ID FROM all_lookup_ids_descriptions WHERE description == '{description}'"
     cursor = conn.cursor()
     cursor.execute(query)
     data = cursor.fetchall()
