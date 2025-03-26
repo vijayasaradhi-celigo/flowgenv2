@@ -9,14 +9,14 @@ import uuid
 
 st.set_page_config(page_title="Flow Generator", page_icon=":shark:", layout="wide")
 
-st.title('Flow Generator')
+st.title('Flow Generator v1.0.0')
 
 def main():
     all_import_ids = []
     all_export_ids = []
     total_time = 0
     flow_description = st.text_input("Describe your flow:")
-    create_in_io = st.checkbox("Create components in integrator.io")
+    #create_in_io = st.checkbox("Create components in integrator.io")
     if st.button("Generate Flow components"):
         t1 = time()
         flow_steps = generate_flow_steps_json_from_flow_description(flow_description)
@@ -132,8 +132,5 @@ def test():
         st.write("Flow created in integrator.io")
 
 
-#with st.expander("Examples"):
-#    all_examples_content = '\n'.join(flow_examples)
-#    st.text_area("all_examples", all_examples_content, height=200)
 if __name__ == "__main__":
     main()
