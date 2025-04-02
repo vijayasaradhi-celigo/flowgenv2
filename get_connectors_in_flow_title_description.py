@@ -38,6 +38,7 @@ def get_connector_names_in_flows(table_name, connector_names):
             flow_name = flow_obj.get('name', '')
 
             num_connectors, connectors_str = get_connector_names_in_flow(flow_name.lower(), connector_names)
+            if num_connectors==3: print(flow_name, connectors_str)
             if num_connectors < 2: continue
             row = [flow_id, flow_name, num_connectors, connectors_str]
             all_rows.append(row)
